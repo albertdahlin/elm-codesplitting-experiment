@@ -22,7 +22,7 @@ type Msg
 
 
 type alias Model =
-    { val : String
+    { footer : Maybe Port.Footer
     }
 
 
@@ -34,7 +34,7 @@ init : Flags -> ( Model, Cmd Msg )
 init flags =
     let
         model =
-            { val = ""
+            { footer = Nothing
             }
     in
     ( model
@@ -51,13 +51,45 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         GotFooter footer ->
-            ( model, Cmd.none )
+            ( { model | footer = Just footer }
+            , Cmd.none
+            )
 
 
 view : Model -> Html Msg
 view model =
     Html.footer
-        [ HA.class "constrained py-4"
+        [ HA.class "constrained py-8 flex flex-row space-x-8"
         ]
-        [ Html.text "Footer"
-        ]
+        (case model.footer of
+            Just footer ->
+                view_Footer footer
+
+            Nothing ->
+                []
+        )
+
+
+view_Footer : Port.Footer -> List (Html msg)
+view_Footer footer =
+    footer.columns
+        |> List.map
+            (\col ->
+                Html.div
+                    [ HA.class "flex flex-col space-y-2"
+                    ]
+                    (Html.h3
+                        [ HA.class "text-lg font-bold mb-2"
+                        ]
+                        [ Html.text col.title ]
+                        :: List.map
+                            (\link ->
+                                Html.a
+                                    [ HA.href link.href
+                                    ]
+                                    [ Html.text link.title
+                                    ]
+                            )
+                            col.links
+                    )
+            )
