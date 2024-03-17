@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Code split</title>
+    <meta name="description" content="Test code splitting"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no"/>
+    <script>window.uiLoaded = function() {}</script>
+    <script defer async onload="uiLoaded()" type="module" src="./main.js"></script>
+</head>
+<body>
+    <header class="constrained"></header>
+    <main class="constrained"></main>
+    <footer class="constrained"></footer>
+    <script>
+        const header = document.querySelector('header');
+        const main = document.querySelector('main');
+        const footer = document.querySelector('footer');
+        const worker = new Worker('./worker.js');
+
+        if (window.startUI) {
+            window.startUI(worker, {
+                header: header,
+                main: main,
+                footer: footer
+            });
+        } else {
+            window.uiLoaded = function() {
+                window.startUI(worker, {
+                    header: header,
+                    main: main,
+                    footer: footer
+                });
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="./main.css"></link>
+</body>
+</html>
+

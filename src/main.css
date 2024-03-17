@@ -1,0 +1,42 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --site-header-height: 4em;
+    --site-width: 1200px;
+}
+
+body {
+    --site-padx: max(1em, (100vw - calc(var(--site-width))) / 2);
+}
+
+header {
+    background: #DDD;
+    height: var(--site-header-height);
+}
+
+footer {
+    background: #DDD;
+}
+
+main {
+    min-height: calc(100vh - var(--site-header-height));
+}
+
+.constrained {
+    padding-left: var(--site-padx);
+    padding-right: var(--site-padx);
+}
+
+h1 {
+    font-size: 2em;
+}
+h2 {
+    font-size: 1.8em;
+}
+
+.product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
+}
