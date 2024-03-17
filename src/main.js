@@ -9,12 +9,12 @@ window.startUI = function(worker, el) {
     main.element = el;
     main.Worker = worker;
 
-
     main.Worker.postMessage(['start', { url: window.location.hash }]);
     main.Worker.addEventListener('message', handleWorkerMessage.bind(main));
 
     window.addEventListener('hashchange', (event) => {
         const newURL = new URL(event.newURL);
+        window.scrollTo(0, 0);
         main.Worker.postMessage(['recv_UrlChange', newURL.hash]);
     });
 }

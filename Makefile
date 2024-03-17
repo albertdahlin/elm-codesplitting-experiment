@@ -1,7 +1,6 @@
 
 
 all: node_modules build/tmp build/main.html build/main.js build/main.css build/worker.js
-	ls -la build/tmp
 
 FORCE:
 
