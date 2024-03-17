@@ -58,7 +58,7 @@ update msg model =
 view : Model -> Html Msg
 view model =
     Html.main_
-        [ HA.class "constrained py-4 grid grid-cols-2 gap-8"
+        [ HA.class "constrained fade-in py-4 grid grid-cols-2 gap-8"
         ]
         [ Html.div
             [ HA.class "aspect-square bg-gray-200"

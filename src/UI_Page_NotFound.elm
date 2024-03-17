@@ -55,7 +55,7 @@ update msg model =
 view : Model -> Html Msg
 view model =
     Html.main_
-        [ HA.class "constrained py-4"
+        [ HA.class "constrained fade-in py-4"
         ]
         [ Html.text "Page not found"
         ]

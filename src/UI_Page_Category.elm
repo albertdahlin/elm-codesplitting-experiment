@@ -58,7 +58,7 @@ update msg model =
 view : Model -> Html Msg
 view model =
     Html.main_
-        [ HA.class "constrained py-4"
+        [ HA.class "constrained py-4 fade-in"
         ]
         [ Html.h1 [] [ Html.text model.data.title ]
         , model.data.products

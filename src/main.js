@@ -55,6 +55,8 @@ function handleWorkerMessage(event) {
 
 function startPageApp(name, element, flags) {
     const appName = 'UI_' + name;
+    element.innerHTML = `<pre>Loading ${appName}...</pre>`;
+    element.className = 'constrained fade-in spinner';
     delete main.page;
     return import(`./UI.${appName}.mjs`)
         .then(Elm => {
